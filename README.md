@@ -5,15 +5,6 @@ This project implements two systems for user search queries to advertiser vertic
 - Low-latency baseline (~1 ms) : TF-IDF + Logistic Regression (Top-3 Accuracy = 0.786)
 - High-latency semantic model (~1 ms): LLM-based classifier with structured outputs (category + intent) (Top-3 Accuracy = ~1.00)
 
-## Architecture
-
-```
-User query                                                                    
-   │                                                                                                       ├─► [Low-latency path]  TF-IDF vectorizer → Logistic Regression → category              │                                                                                                       └─► [Semantic path]     GPT-4o-mini (structured output) → category + intent + top-3 confidence
-```
-
-The LLM path returns richer signal (intent, confidence, top-3 candidates) suited for downstream auction/ranking systems. The TF-IDF path is a drop-in for latency-critical serving.
-
 ## Setup
 
 ### create venv (recommended)
